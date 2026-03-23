@@ -1,0 +1,43 @@
+version: "2"
+run:
+  tests: true
+linters:
+  default: none
+  enable:
+    - errcheck
+    - gocognit
+    - gocyclo
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+  settings:
+    gocognit:
+      min-complexity: 40
+    gocyclo:
+      min-complexity: 25
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - path: ^design/design\.go$
+        linters:
+          - staticcheck
+        text: "ST1001:"
+    paths:
+      - ^gen/
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  exclusions:
+    generated: lax
+    paths:
+      - ^gen/
+      - third_party$
+      - builtin$
+      - examples$
